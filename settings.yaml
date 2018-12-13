@@ -1,0 +1,21 @@
+fields:
+  section_dimensions:
+    type: section
+  max_width:
+    type: text
+    default: 2000
+    width: 50
+  max_height:
+    type: text
+    default: 2000
+    width: 50
+  section_fallback:
+    type: section
+  fallback:
+    type: toggle
+    default: true
+  section_log:
+    type: section
+  use_log:
+    type: toggle
+    default: true

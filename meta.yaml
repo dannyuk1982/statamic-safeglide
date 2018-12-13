@@ -1,0 +1,5 @@
+name: SafeGlide
+version: 1.1
+description: Only resize images with Glide when they are within set dimensions
+developer: Pixel Primate
+developer_url: https://www.pixelprimate.com/
