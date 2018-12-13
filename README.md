@@ -7,12 +7,6 @@ Copy the files over to `/site/addons/SafeGlide`.
 ## Usage
 Instead of using `{{ glide:id }}` use  `{{ SafeGlide:id }}`. I have no idea if this works with the tag pair syntax, it probably doesn't.
 
-## Installation
-Copy the files over to `/site/addons/SafeGlide`.
-
-## Usage
-Instead of using `{{ glide:id }}` use  `{{ SafeGlide:id }}`. I have no idea if this works with the tag pair syntax, it probably doesn't.
-
 There are additional options in the CP under addons – it's worth checking these out and saving to create a settings YAML file before first use.
 
 ## Translations
