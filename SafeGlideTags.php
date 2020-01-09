@@ -12,9 +12,12 @@ class SafeGlideTags extends GlideTags
     public function __call( $method, $args )
     {
 
-      // get parameters
+      //get this item via either id or url
       $tag = explode( ':', $this->tag, 2 )[1];
       $item = array_get( $this->context, $tag );
+
+      //get the image URL of the image, even if SafeGlide:id and not SafeGlide:url was used
+      $imageURL = array_get( $this->context, 'image' );
 
       // get addon preferences
       $maxW = $this->getConfigInt( 'max_width', 0 ) ;
