@@ -6,18 +6,16 @@ use Statamic\Addons\Glide\GlideTags;
 use Statamic\Extend\Tags;
 use Statamic\API\Asset;
 use Statamic\API\Config;
+use Statamic\API\Path;
 
 class SafeGlideTags extends GlideTags
 {
     public function __call( $method, $args )
     {
 
-      //get this item via either id or url
+      // get parameters
       $tag = explode( ':', $this->tag, 2 )[1];
       $item = array_get( $this->context, $tag );
-
-      //get the image URL of the image, even if SafeGlide:id and not SafeGlide:url was used
-      $imageURL = array_get( $this->context, 'image' );
 
       // get addon preferences
       $maxW = $this->getConfigInt( 'max_width', 0 ) ;
@@ -33,6 +31,9 @@ class SafeGlideTags extends GlideTags
         $w = $asset->width();
         $h = $asset->height();
 
+        //get the URL of the original asset
+        $url = Path::toUrl( $asset->resolvedPath() );
+
         // if it's too large...
         if ( $w > $maxW || $h > $maxH ) {
 
@@ -42,7 +43,7 @@ class SafeGlideTags extends GlideTags
               "Asset `$item` ($w x $h) is too large to resize. ".
               "Maximum size is $maxW x $maxH. ".
               ( $fallback
-                ? 'Falling back to original image.'
+                ? 'Falling back to original image at '.$url
                 : 'The image was not served.'
               )
             );
@@ -50,7 +51,7 @@ class SafeGlideTags extends GlideTags
 
           // fall back to the original image (if required)
           if( $fallback ) {
-            return $item; // the URL of the original image
+            return $url; // the URL of the original image
           } else {
             return "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; // 1x1 transparent GIF
           }
